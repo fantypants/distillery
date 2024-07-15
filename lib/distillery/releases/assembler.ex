@@ -868,7 +868,7 @@ defmodule Distillery.Releases.Assembler do
 
     Shell.info "Creating Release file: CWD: #{cwd} Using REL_DIR: #{rel_directory}"
 
-    :ok = :release_handler.create_RELEASES(cwd, 'releases', '#{relfile}', [])
+    :ok = :release_handler.create_RELEASES(cwd, rel_directory, '#{relfile}', [])
 
     File.cd!(old_cwd)
     :ok
