@@ -862,7 +862,13 @@ defmodule Distillery.Releases.Assembler do
     File.cd!(output_dir)
     # Fix for OTP25
     #:ok = :release_handler.create_RELEASES('./', 'releases', '#{relfile}', [])
-    :ok = :release_handler.create_RELEASES(File.cwd!(), Path.join([File.cwd!(), 'releases']), '#{relfile}', [])
+    cwd = File.cwd!()
+    rel_directory = Path.join([File.cwd!(), 'releases'])
+
+    Shell.debug "Creating Release file: CWD: #{cwd} Using REL_DIR: #{rel_directory}"
+
+    :ok = :release_handler.create_RELEASES(cwd, rel_directory, '#{relfile}', [])
+
     File.cd!(old_cwd)
     :ok
   end
