@@ -859,6 +859,7 @@ defmodule Distillery.Releases.Assembler do
     # this is not exposed, and short of re-writing release_handler from scratch, there is
     # no work around for this
     old_cwd = File.cwd!()
+    Shell.info "Changing to Output directory: #{output_dir}"
     File.cd!(output_dir)
     # Fix for OTP25
     #:ok = :release_handler.create_RELEASES('./', 'releases', '#{relfile}', [])
@@ -867,7 +868,7 @@ defmodule Distillery.Releases.Assembler do
 
     Shell.info "Creating Release file: CWD: #{cwd} Using REL_DIR: #{rel_directory}"
 
-    :ok = :release_handler.create_RELEASES(cwd, rel_directory, '#{relfile}', [])
+    :ok = :release_handler.create_RELEASES(cwd, 'releases', '#{relfile}', [])
 
     File.cd!(old_cwd)
     :ok
