@@ -27,6 +27,7 @@ defmodule Distillery.Releases.Config.Providers.Elixir do
   """
 
   use Distillery.Releases.Config.Provider
+  require Logger
 
   @impl Provider
   def init([path]) do
@@ -77,7 +78,7 @@ defmodule Distillery.Releases.Config.Providers.Elixir do
 
   if function_exported?(Mix.Config, :eval!, 2) do
     def eval!(path, imported_paths) do
-      Shell.info "EVAL Checking #{path}"
+      Logger.info "EVAL Checking #{path}"
       {config, _} = Mix.Config.eval!(path, imported_paths)
       config
     end
